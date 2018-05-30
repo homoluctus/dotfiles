@@ -1,0 +1,5 @@
+alias vi='vim'
+alias lr='ls -R'
+alias sudo='sudo '
+alias chrome='google-chrome'
+alias suspend='systemctl suspend'

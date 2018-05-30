@@ -4,15 +4,14 @@ set cindent
 set title
 set omnifunc=htmlcomplete#CompleteTags
 
-hi String ctermfg=228
+set laststatus=2
+set statusline=%F
+hi StatusLine cterm=None ctermbg=34 ctermfg=233
 
 "convert tab to whitespace
 set expandtab
 set tabstop=4
 set shiftwidth=4
-
-set showmatch
-hi MatchParen ctermbg=21 
 
 "auto complete
 inoremap ' ''<LEFT>
@@ -22,11 +21,19 @@ inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap < <><LEFT>
 
+"HTML tag autocomplete
+inoremap <C-g> </><LEFT>
+
 "display invisiable characters
 set list
 set listchars=tab:▹▹,eol:↵,trail:▯,extends:>
 hi SpecialKey ctermfg=240
 hi NonText ctermfg=240
+
+set showmatch
+hi MatchParen ctermbg=21 
+
+hi String ctermfg=228
 
 "highlight cursorline
 set cursorline
@@ -48,11 +55,14 @@ autocmd BufRead,BufNew,BufEnter,BufWinEnter * call DisplayIndentHi()
 "Python syntax highligth
 function! PythonStringHi()
     syn match PythonString /["'].\+["']/ skipwhite
+    syn match PythonArrayKey /["']\w\+["']:/hs=s+1,he=e-2
     syn region PythonDoc start=/"""/ end=/"""/ skipwhite
     syn match PythonSelf /self.\S\+\s/he=e-1
     syn match PythonArgs /(\D\+):\n/ contains=Arguments
     syn region Arguments start=/(/hs=s+1 end=/)/he=e-1 skipwhite contained
+
     hi link PythonString String
+    hi PythonArrayKey ctermfg=39
     hi PythonSelf ctermfg=119
     hi Arguments ctermfg=215
     hi pythonStatement ctermfg=177
@@ -65,10 +75,6 @@ function! PythonStringHi()
     hi link PythonDoc PythonString
 endf
 autocmd BufNew,BufRead *.py call PythonStringHi()
-
-
-"HTML tag autocomplete
-inoremap <C-g> </><LEFT>
 
 "HTML syntax highlight
 function! HTMLHi()

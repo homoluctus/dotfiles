@@ -4,6 +4,8 @@ set cindent
 set title
 set omnifunc=htmlcomplete#CompleteTags
 
+hi String ctermfg=228
+
 "convert tab to whitespace
 set expandtab
 set tabstop=4
@@ -50,7 +52,7 @@ function! PythonStringHi()
     syn match PythonSelf /self.\S\+\s/he=e-1
     syn match PythonArgs /(\D\+):\n/ contains=Arguments
     syn region Arguments start=/(/hs=s+1 end=/)/he=e-1 skipwhite contained
-    hi PythonString ctermfg=228
+    hi link PythonString String
     hi PythonSelf ctermfg=119
     hi Arguments ctermfg=215
     hi pythonStatement ctermfg=177
@@ -74,7 +76,13 @@ function! HTMLHi()
     hi link htmlEndTag htmlTag
     hi htmlTagName ctermfg=197
     hi link htmlSpecialTagName htmlTagName
-    hi htmlString ctermfg=228
     hi htmlComment ctermfg=245
 endf
 autocmd Bufnew,BufRead *.html call HTMLHi()
+
+"YAML syntax highlight
+function! YamlHi()
+    syn match KeyString /\h\+:/he=e-1
+    hi KeyString ctermfg=39
+endf
+autocmd BufNew,BufRead *.yml call YamlHi()

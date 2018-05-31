@@ -57,7 +57,7 @@ function! PythonStringHi()
     syn match PythonString /["'].\+["']/ skipwhite
     syn match PythonArrayKey /["']\w\+["']:/hs=s+1,he=e-2
     syn region PythonDoc start=/"""/ end=/"""/ skipwhite
-    syn match PythonSelf /self.\S\+\s/he=e-1
+    syn match PythonSelf /self.\S\+/
     syn match PythonArgs /(\D\+):\n/ contains=Arguments
     syn region Arguments start=/(/hs=s+1 end=/)/he=e-1 skipwhite contained
 

@@ -54,15 +54,16 @@ autocmd BufRead,BufNew,BufEnter,BufWinEnter * call DisplayIndentHi()
 
 "Python syntax highligth
 function! PythonStringHi()
-    syn match PythonString /["'].\+["']/ skipwhite
-    syn match PythonArrayKey /["']\w\+["']:/hs=s+1,he=e-2
+    syn match PythonString /["'].\*["']/ skipwhite
+    syn region PythonDict start=/{\s\?/ end=/\s\?}/ contains=PythonDictKey
+    syn match PythonDictKey /["']\w\+["']\s\?:/he=e-1 skipwhite contained
     syn region PythonDoc start=/"""/ end=/"""/ skipwhite
     syn match PythonSelf /self.\S\+/
     syn match PythonArgs /(\D\+):\n/ contains=Arguments
     syn region Arguments start=/(/hs=s+1 end=/)/he=e-1 skipwhite contained
 
     hi link PythonString String
-    hi PythonArrayKey ctermfg=39
+    hi PythonDictKey ctermfg=203
     hi PythonSelf ctermfg=119
     hi Arguments ctermfg=215
     hi pythonStatement ctermfg=177

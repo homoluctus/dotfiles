@@ -73,7 +73,7 @@ function! PythonStringHi()
     hi pythonComment ctermfg=244
     hi pythonNumber ctermfg=15
     hi pythonFunction ctermfg=33
-    hi link PythonDoc PythonString
+    hi link PythonDoc pythonComment
 endf
 autocmd BufNew,BufRead *.py call PythonStringHi()
 

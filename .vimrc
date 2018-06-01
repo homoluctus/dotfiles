@@ -46,11 +46,11 @@ hi Conceal ctermfg=243 ctermbg=239
 
 "display and highlight indent
 function! DisplayIndentHi()
-    syn match IndentSpace /^\s\+/ contains=WhiteSpace
-    syn match WhiteSpace /\s/ contained conceal cchar=･
-    hi link WhiteSpace Conceal
+    syn match IndentSpace /^\s\+/ contains=IndentShift
+    syn match IndentShift /\s\{4}/hs=e contained
+    hi IndentShift ctermfg=9 ctermbg=239
 endf
-autocmd BufRead,BufNew,BufEnter,BufWinEnter * call DisplayIndentHi()
+autocmd BufNewFile,BufRead,BufNew,BufWinEnter * call DisplayIndentHi()
 
 "Python syntax highligth
 function! PythonStringHi()
@@ -75,7 +75,7 @@ function! PythonStringHi()
     hi pythonFunction ctermfg=33
     hi link PythonDoc pythonComment
 endf
-autocmd BufNew,BufRead *.py call PythonStringHi()
+autocmd BufNewFile,BufNew,BufRead *.py call PythonStringHi()
 
 "HTML syntax highlight
 function! HTMLHi()
@@ -85,11 +85,11 @@ function! HTMLHi()
     hi link htmlSpecialTagName htmlTagName
     hi htmlComment ctermfg=245
 endf
-autocmd Bufnew,BufRead *.html call HTMLHi()
+autocmd BUfNewFile,BufNew,BufRead *.html call HTMLHi()
 
 "YAML syntax highlight
 function! YamlHi()
     syn match KeyString /\h\+:/he=e-1
     hi KeyString ctermfg=39
 endf
-autocmd BufNew,BufRead *.yml call YamlHi()
+autocmd BufNewFile,BufNew,BufRead *.yml call YamlHi()

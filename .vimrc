@@ -58,14 +58,17 @@ function! PythonStringHi()
     syn region PythonDict start=/{\s\?/ end=/\s\?}/ contains=PythonDictKey
     syn match PythonDictKey /["']\w\+["']\s\?:/he=e-1 skipwhite contained
     syn region PythonDoc start=/"""/ end=/"""/ skipwhite
-    syn match PythonSelf /self.\S\+/
-    syn match PythonArgs /(\D\+):\n/ contains=Arguments
-    syn region Arguments start=/(/hs=s+1 end=/)/he=e-1 skipwhite contained
+    syn region PythonSelfRegion start=/self./ end=/\s\?=/ contains=PythonSelf
+    syn match PythonSelf /self.\w\+/ contained
+    syn match PythonArgs /(.\+):\n/ contains=Arguments,ArgDefaultValue
+    syn match Arguments /\w\+/ skipwhite contained
+    syn match ArgDefaultValue /=\s\?\w\+/ skipwhite contained
 
     hi link PythonString String
     hi PythonDictKey ctermfg=203
     hi PythonSelf ctermfg=119
     hi Arguments ctermfg=215
+    hi ArgDefaultValue ctermfg=255
     hi pythonStatement ctermfg=177
     hi link pythonConditional pythonStatement
     hi link pythonRepeat pythonStatement

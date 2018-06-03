@@ -26,7 +26,8 @@ inoremap <C-g> </><LEFT>
 
 "display invisiable characters
 set list
-set listchars=tab:▹▹,eol:↵,trail:▯,extends:>
+""set listchars=tab:▹▹,eol:↵,trail:▯,extends:>
+set listchars=tab:▹▹,eol:↵,extends:>
 hi SpecialKey ctermfg=240
 hi NonText ctermfg=240
 
@@ -44,6 +45,13 @@ set conceallevel=2
 set concealcursor=niv
 hi Conceal ctermfg=243 ctermbg=239
 
+"display space at end of line
+function! SpaceAtEndOfLine()
+    syn match UselessSpace /\s\+$/
+    hi UselessSpace ctermbg=9
+endf
+autocmd VimEnter,InsertEnter,InsertLeave * call SpaceAtEndOfLine()
+
 "display and highlight indent
 function! DisplayIndentHi()
     syn match IndentSpace /^\s\+/ contains=IndentShift
@@ -58,16 +66,15 @@ function! PythonStringHi()
     syn region PythonDict start=/{\s\?/ end=/\s\?}/ contains=PythonDictKey
     syn match PythonDictKey /["']\w\+["']\s\?:/he=e-1 skipwhite contained
     syn region PythonDoc start=/"""/ end=/"""/ skipwhite
-    syn region PythonSelfRegion start=/self./ end=/\s\?=/ contains=PythonSelf
-    syn match PythonSelf /self.\w\+/ contained
-    syn match PythonArgs /(.\+):\n/ contains=Arguments,ArgDefaultValue
-    syn match Arguments /\w\+/ skipwhite contained
-    syn match ArgDefaultValue /=\s\?\w\+/ skipwhite contained
+    syn match PythonSelf /\(self.\)\w\+/
+    syn match PythonArgs /([a-zA-Z0-9,_= "']*):\n/ contains=PythonArguments,ArgDefaultValue
+    syn match PythonArguments /[(, ][a-zA-Z0-9_]\+[ ),=]/hs=s+1,he=e-1 contained
+    syn match ArgDefaultValue /=\s\?[a-zA-Z0-9_"']\+/ skipwhite contained
 
     hi link PythonString String
     hi PythonDictKey ctermfg=203
     hi PythonSelf ctermfg=119
-    hi Arguments ctermfg=215
+    hi PythonArguments ctermfg=215
     hi ArgDefaultValue ctermfg=255
     hi pythonStatement ctermfg=177
     hi link pythonConditional pythonStatement

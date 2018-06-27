@@ -39,7 +39,7 @@ hi String ctermfg=228
 "highlight cursorline
 set cursorline
 hi CursorLine cterm=None ctermbg=18
-hi LineNr ctermbg=237
+hi LineNr ctermbg=233
 
 set conceallevel=2
 set concealcursor=niv

@@ -38,7 +38,7 @@ hi String ctermfg=228
 
 "highlight cursorline
 set cursorline
-hi CursorLine cterm=None ctermbg=17
+hi CursorLine cterm=None ctermbg=18
 hi LineNr ctermbg=237
 
 set conceallevel=2
@@ -56,7 +56,7 @@ autocmd VimEnter,InsertEnter,InsertLeave * call SpaceAtEndOfLine()
 function! DisplayIndentHi()
     syn match IndentSpace /^\s\+/ contains=IndentShift
     syn match IndentShift /\s\{4}/hs=e contained
-    hi IndentShift ctermfg=9 ctermbg=239
+    hi IndentShift ctermfg=9 ctermbg=245
 endf
 autocmd BufNewFile,BufRead,BufNew,BufWinEnter * call DisplayIndentHi()
 
@@ -80,7 +80,7 @@ function! PythonStringHi()
     hi link pythonConditional pythonStatement
     hi link pythonRepeat pythonStatement
     hi pythonOperator ctermfg=197
-    hi pythonComment ctermfg=244
+    hi pythonComment ctermfg=248
     hi pythonNumber ctermfg=15
     hi pythonFunction ctermfg=33
     hi link PythonDoc pythonComment

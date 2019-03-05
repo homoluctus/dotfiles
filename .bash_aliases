@@ -1,11 +1,11 @@
 alias vi='vim'
-alias lr='ls -R'
+alias ls='ls --color=auto -F'
+alias lr='ls -RF'
+alias ll='ls -alF --time-style=long-iso'
 alias sudo='sudo '
 alias chrome='google-chrome'
 alias suspend='systemctl suspend'
-alias python='python3'
 alias tree='tree -a'
 
 # for docker
-alias dcont='docker container'
 alias dc='docker-compose'

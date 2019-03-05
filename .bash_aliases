@@ -6,6 +6,6 @@ alias sudo='sudo '
 alias chrome='google-chrome'
 alias suspend='systemctl suspend'
 alias tree='tree -a'
-
-# for docker
 alias dc='docker-compose'
+alias iptables='iptables --line-numbers -v'
+alias ip6tables='iptables --line-numbers -v'

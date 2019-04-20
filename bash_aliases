@@ -1,5 +1,6 @@
 alias vi='vim'
 alias ls='ls --color=auto -F'
+alias lr='ls -aF'
 alias lr='ls -RF'
 alias ll='ls -lF --time-style=long-iso'
 alias lla='ls -alF --time-style=long-iso'
